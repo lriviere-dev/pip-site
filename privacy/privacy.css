@@ -1,0 +1,257 @@
+/* Pip's privacy policy: one page of his book on its leather cover, set like the welcome page and the popup (the same
+   colours and rules; IM Fell English from content/fonts, Open Font License). The capitals and the margin's vine are
+   canvases drawn by privacy.js with content/illum.js. */
+@font-face {
+  font-family: 'WC Fell';
+  src: url('../content/fonts/im-fell-english.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'WC Fell';
+  font-style: italic;
+  src: url('../content/fonts/im-fell-english-italic.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'WC Fell SC';
+  src: url('../content/fonts/im-fell-english-sc.woff2') format('woff2');
+  font-display: swap;
+}
+
+:root {
+  --serif: 'WC Fell', 'IM Fell English', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --sc: 'WC Fell SC', 'IM Fell English SC', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --ink: #3a2a22;
+  --faded: #5e4a36;
+  --pale: #9a8466;
+  --rubric: #b62818;
+  --rubric2: #7b2416;
+  --lapis: #1d4690;
+  --vellum: #f5e2b8;
+  --shade: #e8cc96;
+  --edge: #d4ae72;
+  --tan: #b88a52;
+  --gilt: #d99b3e;
+  --gilt2: #f5cd6a;
+  --leather: #4a2c18;
+  --leather2: #6b4329;
+  --soot: #22150e;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 32px 16px 48px;
+  background: var(--leather);
+  box-shadow: inset 0 0 0 1px var(--soot), inset 0 0 0 3px var(--leather2), inset 0 0 0 4px var(--soot);
+  color: var(--ink);
+  font: 18px/1.5 var(--serif);
+}
+
+canvas {
+  image-rendering: pixelated;
+}
+
+/* the page: parchment, the spine's shadow on the left, its leaves stacked at the bottom right; the left and bottom
+   margins are wide, for the vine */
+.page {
+  position: relative;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 34px 44px 64px 76px;
+  background: linear-gradient(90deg, rgba(74, 44, 24, 0.36), rgba(74, 44, 24, 0.1) 8px, rgba(74, 44, 24, 0) 18px), var(--vellum);
+  box-shadow: inset 0 0 22px rgba(160, 106, 36, 0.28), 1px 1px 0 var(--edge), 2px 2px 0 var(--vellum), 3px 3px 0 var(--edge), 4px 4px 0 var(--soot);
+}
+
+/* the margin's decoration, under the text */
+#deco {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+.lang {
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  display: flex;
+  border: 1px solid var(--tan);
+}
+.lang button {
+  padding: 2px 9px 3px;
+  border: 0;
+  background: none;
+  color: var(--faded);
+  font: 14px/1.3 var(--sc);
+  cursor: pointer;
+}
+.lang button[aria-pressed='true'] {
+  background: var(--rubric);
+  color: var(--vellum);
+}
+.lang button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--lapis);
+  outline-offset: 1px;
+}
+
+header {
+  position: relative;
+  padding: 18px 0 6px;
+  text-align: center;
+}
+h1 {
+  display: inline-block;
+  margin: 0;
+  color: var(--rubric);
+  font: 42px/1.1 var(--serif);
+  text-wrap: balance;
+}
+.sub {
+  margin: 8px auto 0;
+  max-width: 30em;
+  color: var(--faded);
+  font-style: italic;
+  text-wrap: balance;
+}
+.date {
+  margin: 6px 0 0;
+  color: var(--pale);
+  font: 14px/1.3 var(--sc);
+  letter-spacing: 0.04em;
+}
+
+/* a double rule, gold over tan, as under the popup's header */
+.rule {
+  height: 4px;
+  margin: 14px 0 18px;
+  border-top: 2px solid var(--gilt);
+  border-bottom: 1px solid var(--tan);
+}
+
+/* a section holds its capital: a short one does not let it hang into the next */
+section {
+  display: flow-root;
+  position: relative;
+  margin: 0 0 22px;
+}
+/* a section's title in rubric small capitals, its rule running to the margin */
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 6px;
+  color: var(--rubric);
+  font: 21px/1.3 var(--sc);
+  letter-spacing: 0.03em;
+}
+h2::after {
+  flex: 1;
+  height: 1px;
+  background: var(--tan);
+  content: '';
+}
+p {
+  margin: 0 0 10px;
+}
+section p,
+section li {
+  text-wrap: pretty;
+}
+
+/* the capital that opens a section: a canvas in the text's left corner. The letter it stands for stays in the text for
+   a reader that cannot see the picture, hidden from the eye. */
+.cap {
+  float: left;
+  margin: 5px 9px 0 0;
+}
+.cap.big {
+  margin: 6px 12px 2px 0;
+}
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* what Pip does with a thing: its name in the margin's ink, then the words */
+ul {
+  clear: left;
+  margin: 2px 0 10px;
+  padding: 0;
+  list-style: none;
+}
+li {
+  position: relative;
+  margin: 0 0 7px;
+  padding-left: 20px;
+}
+/* a red lozenge, the scribe's bullet */
+li::before {
+  position: absolute;
+  left: 3px;
+  top: 0.62em;
+  width: 7px;
+  height: 7px;
+  background: var(--rubric);
+  transform: rotate(45deg);
+  content: '';
+}
+li b {
+  color: var(--lapis);
+  font-weight: normal;
+  font-family: var(--sc);
+  letter-spacing: 0.02em;
+}
+a {
+  color: var(--lapis);
+  text-decoration-color: var(--tan);
+  text-underline-offset: 2px;
+}
+
+footer {
+  clear: both;
+}
+footer p {
+  margin: 0;
+  color: var(--faded);
+  font-style: italic;
+  text-align: center;
+}
+
+@media (max-width: 620px) {
+  body {
+    padding: 12px 8px 32px;
+    font-size: 17px;
+  }
+  /* a narrow page keeps a thin margin: the vine gives way to a plain red rule (privacy.js) */
+  .page {
+    padding: 44px 18px 30px 34px;
+  }
+  h1 {
+    font-size: 32px;
+  }
+}
+
+@media print {
+  body {
+    padding: 0;
+    background: none;
+    box-shadow: none;
+  }
+  .page {
+    box-shadow: none;
+  }
+  .lang {
+    display: none;
+  }
+}
