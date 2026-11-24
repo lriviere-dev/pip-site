@@ -218,6 +218,35 @@ a {
   text-underline-offset: 2px;
 }
 
+/* the About page's link drawn as a button of the book (its coffee for the scribe): gilt on red, as the popup's */
+.link-row {
+  margin: 14px 0 6px;
+  text-align: center;
+}
+.book-link {
+  display: inline-block;
+  padding: 8px 20px;
+  border: 1px solid var(--rubric2);
+  border-radius: 3px;
+  background: var(--rubric);
+  box-shadow: inset 0 0 0 1px var(--gilt), 0 2px 0 var(--rubric2);
+  color: var(--vellum);
+  font: 19px/1.3 var(--sc);
+  letter-spacing: 0.03em;
+  text-decoration: none;
+}
+.book-link:hover,
+.book-link:focus-visible {
+  background: var(--rubric2);
+  outline: none;
+}
+.note {
+  color: var(--faded);
+  font-size: 16px;
+  font-style: italic;
+  text-align: center;
+}
+
 footer {
   clear: both;
 }

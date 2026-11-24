@@ -6213,6 +6213,148 @@
     '.bGR.',
     'b...R',
   ];
+  // The margins of the drop caps' other styles (rules.js capStyle): the same ladder as Classic's in each style's own
+  // manner, the kind picking the motif stamped on the line (3 x 3, at `at`, its top-left cell; a third value mirrors it),
+  // the ends and the corner; at Masterpiece `metal` recolours the line and the corners. Drawn in tools/vignettes
+  // (margins.js), reviewed at the desk (review/vines.html).
+  const STYLE_MARGINS = {
+    // a green stem with leaves, the kind's motif on a stalk either side (a wild rose, an acorn, brambles, a
+    // toadstool); copper at Masterpiece
+    nature: {
+      rule: ['Ve'],
+      unit: [
+        '....V....',
+        '....V....',
+        '...Ve....',
+        '...VV....',
+        '..aV.....',
+        '.avV.....',
+        '...eV....',
+        '....V....',
+        '.....V...',
+        '....VV...',
+        '.....Ve..',
+        '.....Vva.',
+      ],
+      at: [[5, 2], [1, 8]],
+      motif: {
+        virtue: ['.i.', 'iyi', '.I.'],
+        skill: ['ZZZ', 'zqz', '.z.'],
+        prophecy: ['RR.', 'RoR', '.RR'],
+        mystery: ['RwR', 'RRR', '.q.'],
+      },
+      ends: {
+        virtue: ['.iIi.', 'iIyIi', '.iIi.', '..V..', '.vVv.'],
+        skill: ['.ZZZ.', 'ZZZZZ', '.zqz.', '.zzz.', '..z..'],
+        prophecy: ['.RR..', 'RoRR.', '.RRoR', '..eR.', '.eVe.'],
+        mystery: ['.RRR.', 'RwRwR', 'RRRRR', '..q..', '.qQq.'],
+      },
+      corner: ['..v..', '.vVv.', 'vVyVv', '.vVv.', '..v..'],
+      metal: { V: 'F', e: 'J', v: 'j', a: 'j' },
+    },
+    // a black rule with a teal inline, a gold bead and a stepped band in each length, the motif in a pair (a small
+    // sun, a step, a diamond, a keyplate); the inline silver at Masterpiece
+    deco: {
+      rule: ['xt'],
+      unit: [
+        '...xtx...',
+        '...xtx...',
+        '...xtx...',
+        '...xGx...',
+        '...xtx...',
+        '...xtx...',
+        '..xxtxx..',
+        '.xxtttxx.',
+        '..xxtxx..',
+        '...xtx...',
+        '...xtx...',
+        '...xtx...',
+      ],
+      at: [[6, 2], [0, 2, true]],
+      motif: {
+        virtue: ['.f.', 'fof', '.f.'],
+        skill: ['..o', '.oo', 'ooo'],
+        prophecy: ['.G.', 'GxG', '.G.'],
+        mystery: ['SSS', 'SxS', 'SSS'],
+      },
+      ends: {
+        virtue: ['f.f.f', '.fff.', 'ffoff', '.fff.', 'f.f.f'],
+        skill: ['..o..', '.ooo.', 'ooooo', '.....', 'ooooo'],
+        prophecy: ['..G..', '.GxG.', 'GxgxG', '.GxG.', '..G..'],
+        mystery: ['GGGGG', 'GSxSG', 'GSxSG', 'GxxxG', 'GGGGG'],
+      },
+      corner: ['xxxxx', 'xtttx', 'xtGtx', 'xtttx', 'xxxxx'],
+      metal: { t: 'S' },
+    },
+    // a black bramble with grey thorns, the motif in oxblood or grisaille (a black rose, a dagger, a skull, a
+    // crescent); blackened iron at Masterpiece
+    sable: {
+      rule: ['NM'],
+      unit: [
+        '....@....',
+        '...n@....',
+        '...@.....',
+        '...@@....',
+        '...@.....',
+        '..n@.....',
+        '....@....',
+        '....@n...',
+        '.....@...',
+        '....@@...',
+        '.....@...',
+        '.....@n..',
+      ],
+      at: [[5, 2], [1, 8]],
+      motif: {
+        virtue: ['.N.', 'NMN', '.N.'],
+        skill: ['..m', '.m.', 'N..'],
+        prophecy: ['mmm', 'KmK', '.m.'],
+        mystery: ['.nn', 'n..', '.nn'],
+      },
+      ends: {
+        virtue: ['.NNN.', 'NMNMN', '.NMN.', '..@..', '.n@n.'],
+        skill: ['....m', '...m.', '.Nm..', '.NN..', 'N....'],
+        prophecy: ['.mmm.', 'mmmmm', 'mKmKm', '.mmm.', '.m.m.'],
+        mystery: ['..nn.', '.n...', 'n....', '.n...', '..nn.'],
+      },
+      corner: ['.n.n.', 'n@N@n', '.NMN.', 'n@N@n', '.n.n.'],
+      metal: { '@': '&', n: '%', N: '#', M: '&' },
+    },
+    // a violet serpent winding down, lit on its left, a sign in each bay of its coils (the sun, fire, water, the
+    // moon); electrum at Masterpiece
+    alchemy: {
+      rule: ['oR'],
+      unit: [
+        '....Uu...',
+        '.....Uu..',
+        '......Uu.',
+        '......Uu.',
+        '.....Uu..',
+        '....Uu...',
+        '...Uu....',
+        '..Uu.....',
+        '.Uu......',
+        '.Uu......',
+        '..Uu.....',
+        '...Uu....',
+      ],
+      at: [[1, 2], [5, 8]],
+      motif: {
+        virtue: ['.o.', 'oGo', '.o.'],
+        skill: ['.o.', 'o.o', 'ooo'],
+        prophecy: ['ttt', 't.t', '.t.'],
+        mystery: ['.UU', 'U..', '.UU'],
+      },
+      ends: {
+        virtue: ['.ooo.', 'o...o', 'o.=.o', 'o...o', '.ooo.'],
+        skill: ['..o..', '.o.o.', '.o.o.', 'o...o', 'ooooo'],
+        prophecy: ['ttttt', 't...t', '.t.t.', '.t.t.', '..t..'],
+        mystery: ['.UUU.', 'UU...', 'U....', 'UU...', '.UUU.'],
+      },
+      corner: ['..o..', '.uou.', 'ooGoo', '.uou.', '..o..'],
+      metal: { U: '+', u: '~' },
+    },
+  };
   // The miniatures, framed scenes in the manner of the old books (a bird among flowers, a knight riding a snail, a
   // dragon, a hare...): two for each kind, either side of the title.
   const MINIATURES = {
@@ -6443,30 +6585,194 @@
     const rows = Array.from({ length: Math.max(0, n) }, (_, i) => unit[i % unit.length]);
     return across ? [...unit[0]].map((_, x) => rows.map((r) => r[x]).join('')) : rows;
   }
-  // The decoration of a book of `kind` bound at `grade`, round a text block (screen pixels in the page: l t r b, and
-  // the page's W x H): a list of { g (a grid of palette letters), x, y, s } to paint. The page makes room for it
+  // A style's line with the kind's motif stamped on it, and a grid recoloured by a map (its metal).
+  function stampMotif(unit, motif, at) {
+    const g = cells(unit);
+    for (const [x, y, flip] of at) motif.forEach((row, j) => [...row].forEach((c, i) => { if (c !== '.') g[y + j][x + (flip ? row.length - 1 - i : i)] = c; }));
+    return g.map((row) => row.join(''));
+  }
+  const tint = (rows, map) => (map ? rows.map((row) => [...row].map((c) => map[c] || c).join('')) : rows);
+  // The ornament of the drop caps' other styles round the title miniatures, from Resplendent: the picture stays the
+  // kind's, the style shows outside its frame, on the side away from the title only (it stays clear of the title, and of
+  // the seal's ribbons at the top right: the top corner's piece lies along the top edge, nothing sticks out sideways
+  // there). Each piece is drawn for the left miniature's corner (`at`, its cell on the frame's corner, under the
+  // frame), the right one's is the mirror; `metal` recolours it at Masterpiece. Drawn in tools/vignettes (mini-deco.js).
+  const MINI_ORNAMENT = {
+    nature: {
+      top: { at: [5, 5], rows: [
+        '.........v...',
+        '......vv.vV..',
+        '.....vvvvv.V.',
+        '.....vVVV..V.',
+        '....VV....V..',
+        '.............',
+        '.............',
+        '.............',
+        '.............',
+        '.............',
+        '.............',
+        '.............',
+        '.............',
+      ] },
+      bottom: { at: [5, 7], rows: [
+        '.............',
+        '..VV.........',
+        '.V..V........',
+        'vvv..........',
+        '..vV.........',
+        '.vvV.........',
+        '.vvV.........',
+        '..vvV........',
+        '....VV....V..',
+        '.IiI.vVVV..V.',
+        '.iyi.vvvvv.V.',
+        '..iI..vv.vV..',
+        '.........v...',
+      ] },
+      metal: { i: 'g', I: 'G', V: 'J', v: 'F' },
+    },
+    deco: {
+      top: { at: [8, 8], rows: [
+        '....................',
+        '....................',
+        '....................',
+        '....................',
+        '..........gg........',
+        '........GGGGGGxx....',
+        '........ttttttxx....',
+        '........xxxxxxxx....',
+      ] },
+      bottom: { at: [8, 11], rows: [
+        '....................',
+        '....................',
+        '....................',
+        '....................',
+        '.....xxx............',
+        '.....xxx............',
+        '.....Gtx............',
+        '.....Gtx............',
+        '.....Gtx............',
+        '.....Gtx............',
+        '.....Gtx............',
+        '.....Gtx............',
+        '..xfffGGxxxxxxxx....',
+        '..xoooGGttttttxx....',
+        '..xoofofGGGGGGxx....',
+        '...xfoof............',
+        '....xoof............',
+        '.....xxx............',
+        '....................',
+        '....................',
+      ] },
+      metal: { t: 'S', o: 'G', f: 'g' },
+    },
+    sable: {
+      top: { at: [5, 5], rows: [
+        '.............',
+        '.............',
+        '.......n.....',
+        '.....n.@..n..',
+        '....@@@.@@.@.',
+      ] },
+      bottom: { at: [5, 7], rows: [
+        '.............',
+        '...@.........',
+        '..@n.........',
+        '...@.........',
+        '....@n.......',
+        '....@........',
+        '...n@........',
+        '....@........',
+        '...n@@@..@@.@',
+        '.....@.@@..@.',
+        '.N..@..n...n.',
+        'NMN@.........',
+        '.NN..........',
+      ] },
+      metal: { '@': '&', n: '%', N: '#', M: '&' },
+    },
+    alchemy: {
+      top: { at: [8, 8], rows: [
+        '....................',
+        '....................',
+        '....................',
+        '.........UU......+..',
+        '........U....g..+.+.',
+        '.........uu.gGg..+..',
+        '.............g..+++.',
+        '....................',
+      ] },
+      bottom: { at: [8, 11], rows: [
+        '....................',
+        '....................',
+        '...ttttt............',
+        '....ttt.............',
+        '.....t..............',
+        '....................',
+        '......U.............',
+        '....................',
+        '......U.............',
+        '....................',
+        '......U.............',
+        '....................',
+        '..uuuu..............',
+        '.Uu==uu..U.U.U..o...',
+        'UU.oo.uu.......ooo..',
+        'U=oGGo=u......ooooo.',
+        'U=oGGo=u............',
+        'UU.oo.uu............',
+        '.UUK=UU.............',
+        '.RUUUU..............',
+      ] },
+      metal: { U: '+', u: '~' },
+    },
+  };
+  const flipX = (rows) => rows.map((row) => [...row].reverse().join(''));
+  // the miniature with its ornament, and where the miniature's top-left now sits in it (dx, dy cells)
+  function ornament(style, grade, mini, side) {
+    const P = MINI_ORNAMENT[style];
+    if (!P || grade < 3) return { g: mini, dx: 0, dy: 0 };
+    const w = mini[0].length, h = mini.length;
+    const parts = [[P.top, 0], [P.bottom, h - 1]].map(([pc, cy]) => {
+      let rows = tint(pc.rows, grade >= 4 ? P.metal : null), x = -pc.at[0];
+      if (side === 'right') { rows = flipX(rows); x = w - (x + rows[0].length); }
+      return { rows, x, y: cy - pc.at[1] };
+    });
+    const x0 = Math.min(0, ...parts.map((p) => p.x)), y0 = Math.min(0, ...parts.map((p) => p.y));
+    const x1 = Math.max(w, ...parts.map((p) => p.x + p.rows[0].length)), y1 = Math.max(h, ...parts.map((p) => p.y + p.rows.length));
+    const g = Array.from({ length: y1 - y0 }, () => Array(x1 - x0).fill('.'));
+    for (const p of parts) p.rows.forEach((row, j) => [...row].forEach((c, i) => { if (c !== '.') g[p.y + j - y0][p.x + i - x0] = c; }));
+    mini.forEach((row, j) => [...row].forEach((c, i) => { if (c !== '.') g[j - y0][i - x0] = c; }));
+    return { g: g.map((row) => row.join('')), dx: -x0, dy: -y0 };
+  }
+  // The decoration of a book of `kind` bound at `grade`, in its drop caps' `style` (Classic's without one), round a text
+  // block (screen pixels in the page: l t r b, and the page's W x H): a list of { g (a grid of palette letters), x, y, s }
+  // to paint. The page makes room for it
   // (newtab.css, .deco1 to .deco4).
-  function margins(kind, grade, box) {
+  function margins(kind, grade, box, style) {
     const out = [];
     if (!(grade >= 1) || !VINES[kind]) return out;
     const S = 2, MT = 2;
     const { l, t, r, b, W, H } = box;
     const put = (rows, x, y, s = S) => out.push({ g: cells(rows), x: Math.round(x), y: Math.round(y), s });
-    const end = ENDS[kind];
+    const sm = STYLE_MARGINS[style];
+    const metal = sm && grade >= 4 ? sm.metal : null;
+    const end = sm ? sm.ends[kind] : ENDS[kind];
     if (grade === 1) {
       const x = l - 14;
-      put(strip(['Rr'], Math.ceil((b - t) / S)), x, t);
+      put(strip(sm ? sm.rule : ['Rr'], Math.ceil((b - t) / S)), x, t);
       put(end, x + 1 - 5, t - 12);
       put(end, x + 1 - 5, b + 2);
       return out;
     }
     const vx = l - 24;
     const vy = b + 6;
-    const vine = VINES[kind];
+    const vine = sm ? stampMotif(tint(sm.unit, metal), sm.motif[kind], sm.at) : VINES[kind];
+    const corner = sm ? tint(sm.corner, metal) : CORNER;
     put(strip(vine, Math.ceil((vy - t + 4) / S)), vx, t - 4);
     put(strip(vine, Math.ceil((r - vx - 18) / S), true), vx + 18, vy);
     put(end, r, vy + 4);
-    put(CORNER, vx + 4, vy + 4);
+    put(corner, vx + 4, vy + 4);
     // the two miniatures flank the title, close to its words (`box.title`: l r t b, else the text's top corners); at
     // Masterpiece their frames are gilded: gold, lit along the top and the left
     const minis = grade >= 3 ? MINI_OF[kind].map((id) => MINIATURES[id]) : [];
@@ -6474,9 +6780,10 @@
     minis.forEach((m, i) => {
       const w = m[0].length, hh = m.length;
       const g = grade >= 4 ? m.map((row, y) => [...row].map((c, x) => (y === 0 || x === 0 ? 'g' : y === hh - 1 || x === w - 1 ? 'G' : c)).join('')) : m;
-      put(g, i ? ti.r + 12 : ti.l - 12 - w * MT, (ti.t + ti.b) / 2 - (hh * MT) / 2, MT);
+      const o = ornament(style, grade, g, i ? 'right' : 'left');
+      put(o.g, (i ? ti.r + 12 : ti.l - 12 - w * MT) - o.dx * MT, (ti.t + ti.b) / 2 - (hh * MT) / 2 - o.dy * MT, MT);
     });
-    if (grade >= 3) put(CORNER, vx + 4, t - 16);
+    if (grade >= 3) put(corner, vx + 4, t - 16);
     return out;
   }
 

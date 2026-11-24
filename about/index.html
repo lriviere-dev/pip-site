@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About Pip</title>
+    <link rel="icon" href="../icons/icon32.png" />
+    <link rel="stylesheet" href="../privacy/privacy.css" />
+  </head>
+  <body>
+    <!-- About Pip: who made him, why he is free, the coffee for the scribe, and what others made that he ships. A page of his
+         book dressed as the privacy policy is (privacy/privacy.css and privacy.js, which sets the texts about.js hands it).
+         tools/build-site.py copies it to docs/about/ with the policy. -->
+    <main class="page" id="page">
+      <canvas id="deco" aria-hidden="true"></canvas>
+      <nav class="lang" id="lang" aria-label="Language">
+        <button type="button" data-v="en" lang="en">English</button><button type="button" data-v="fr" lang="fr">Français</button>
+      </nav>
+      <header>
+        <h1 id="title"></h1>
+        <p class="sub" id="sub"></p>
+        <p class="date" id="date"></p>
+      </header>
+      <div class="rule"></div>
+      <div id="text"></div>
+      <footer>
+        <div class="rule"></div>
+        <p id="foot"></p>
+      </footer>
+    </main>
+    <script src="../content/illum.js"></script>
+    <script src="about.js"></script>
+    <script src="../privacy/privacy.js"></script>
+  </body>
+</html>

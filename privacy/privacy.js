@@ -1,13 +1,15 @@
-// Pip's privacy policy: its texts (English and French, in TEXT: the one place to change what it says) and its dress,
+// Pip's privacy policy: its texts (English and French, in PRIVACY: the one place to change what it says) and its dress,
 // the page of a finely bound book: a Gilded capital opens it, a Painted one opens each section, and the vine of a
 // Masterpiece runs down the margin, all drawn by content/illum.js. No browser API: the same files are the page the
 // stores link to (tools/build-site.py copies them to docs/privacy/).
+// The About page (extension/about/) is dressed by this same script: its own about.js, loaded first, sets PIP_PAGE
+// ({ text, key }) and this script sets that text instead of the policy's.
 (() => {
   // Printed with [at] so that address harvesters don't pick it up.
   const MAIL = 'lriviere.mail [at] gmail.com';
 
   // A section: h (its title), p (paragraphs before the list), list ([name, what is said of it]), after (paragraphs after it).
-  const TEXT = {
+  const PRIVACY = {
     en: {
       title: 'Pip’s privacy policy',
       sub: 'What Pip reads, what he keeps, and what never leaves your device.',
@@ -18,7 +20,7 @@
           h: 'In short',
           p: [
             'Pip is a game that plays on the text you read, so he has to read it. He reads it on your own device, uses it for the game, and forgets it.',
-            'There is no account, no advertising, no analytics and no tracker. Pip has no server: his maker receives nothing from you, not even a count of who plays.',
+            'There is no account, no advertising, no analytics and no tracker. Pip has no server: his maker receives nothing from you.',
           ],
         },
         {
@@ -85,7 +87,7 @@
           h: 'En bref',
           p: [
             'Pip est un jeu qui se joue sur le texte que vous lisez : il doit donc le lire. Il le lit sur votre appareil, s’en sert pour le jeu, puis l’oublie.',
-            'Il n’y a ni compte, ni publicité, ni mesure d’audience, ni traceur. Pip n’a pas de serveur : son auteur ne reçoit rien de vous, pas même le nombre de joueurs.',
+            'Il n’y a ni compte, ni publicité, ni mesure d’audience, ni traceur. Pip n’a pas de serveur : son auteur ne reçoit rien de vous.',
           ],
         },
         {
@@ -112,7 +114,7 @@
           h: 'Ce qui quitte votre appareil',
           p: ['Rien ne va à l’auteur de Pip. Quelques données vont ailleurs, chacune pour une seule raison, et la plupart seulement à votre demande :'],
           list: [
-            ['La copie dans votre compte de navigateur', 'activée par défaut dans le navigateur. La sauvegarde de Pip, vos réglages, le mot du jour et vos autres Pips sont copiés dans le stockage synchronisé du navigateur, pour survivre à une réinstallation. Si vous êtes connecté au navigateur avec la synchronisation activée, son éditeur (Google, Mozilla…) transporte cette copie entre vos ordinateurs, selon sa propre politique de confidentialité. Choisissez « This computer only » dans la sauvegarde de Pip pour l’arrêter.'],
+            ['La copie dans votre compte de navigateur', 'activée par défaut dans le navigateur. La sauvegarde de Pip, vos réglages, le mot du jour et vos autres Pips sont copiés dans le stockage synchronisé du navigateur, pour survivre à une réinstallation. Si vous êtes connecté au navigateur avec la synchronisation activée, son éditeur (Google, Mozilla…) transporte cette copie entre vos ordinateurs, selon sa propre politique de confidentialité. Choisissez « Cet ordinateur seulement » dans la sauvegarde de Pip pour l’arrêter.'],
             ['Le dictionnaire', 'désactivé par défaut. Activé, il envoie un mot que vous enregistrez à Wiktionary (la fondation Wikimedia) pour en chercher le sens. Ce mot seulement. Dans Firefox, le navigateur vous demande votre accord quand vous l’activez.'],
             ['La recherche', 'ce que vous tapez dans la recherche du camp va au moteur de recherche de votre navigateur, comme si vous l’aviez tapé dans la barre d’adresse.'],
             ['Le lecteur de PDF', 'va chercher un PDF à son adresse, comme le ferait le navigateur.'],
@@ -124,7 +126,7 @@
           h: 'Vos choix',
           list: [
             ['Désactiver Pip', 'pour un site ou partout depuis son bouton dans la barre d’outils ; sur Android avec l’interrupteur de l’application, en le déposant sur la croix, ou en coupant le service d’accessibilité.'],
-            ['Garder la sauvegarde sur un seul appareil', 'avec « This computer only ».'],
+            ['Garder la sauvegarde sur un seul appareil', 'avec « Cet ordinateur seulement ».'],
             ['Tout retirer', 'exportez la sauvegarde si vous y tenez, puis désinstallez. Il ne reste rien ailleurs, sauf la copie du compte de navigateur, que le navigateur retire avec les données de l’extension.'],
           ],
           after: ['Puisque rien ne parvient à l’auteur de Pip, il n’a rien à vous montrer, à corriger, à transmettre ou à effacer : tout est déjà entre vos mains.'],
@@ -143,6 +145,11 @@
       ],
     },
   };
+
+  // The page this script dresses: the policy, or the one another script handed it (the About page).
+  const PAGE = globalThis.PIP_PAGE || null;
+  const TEXT = (PAGE && PAGE.text) || PRIVACY;
+  const KEY = (PAGE && PAGE.key) || 'pip:privacy:lang';
 
   const I = globalThis.WC && WC.illum;
   const $ = (id) => document.getElementById(id);
@@ -179,7 +186,8 @@
     document.title = T.title;
     $('title').textContent = T.title;
     $('sub').textContent = T.sub;
-    $('date').textContent = T.date;
+    $('date').textContent = T.date || '';
+    $('date').hidden = !T.date;
     $('foot').textContent = T.foot;
     for (const b of $('lang').querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.v === lang));
     const root = $('text');
@@ -204,6 +212,18 @@
         sec.append(ul);
       }
       for (const t of s.after || []) sec.append(el('p', '', t));
+      // A link drawn as the book's button (the About page's coffee): `link` { text, href }, the section left out when
+      // there is no address to go to.
+      if (s.link) {
+        if (!s.link.href) return;
+        const a = el('a', 'book-link', s.link.text);
+        a.href = s.link.href;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        sec.append(el('p', 'link-row'));
+        sec.lastChild.append(a);
+      }
+      for (const t of s.end || []) sec.append(el('p', 'note', t));
       root.append(sec);
     });
     decorate();
@@ -253,7 +273,7 @@
   const asked = new URLSearchParams(location.search).get('lang');
   let kept = null;
   try {
-    kept = localStorage.getItem('pip:privacy:lang');
+    kept = localStorage.getItem(KEY);
   } catch {}
   let lang = [asked, kept, (navigator.language || 'en').slice(0, 2)].find((l) => TEXT[l]) || 'en';
   $('lang').addEventListener('click', (e) => {
@@ -261,7 +281,7 @@
     if (!b || !TEXT[b.dataset.v]) return;
     lang = b.dataset.v;
     try {
-      localStorage.setItem('pip:privacy:lang', lang);
+      localStorage.setItem(KEY, lang);
     } catch {}
     render(lang);
   });
@@ -275,5 +295,5 @@
   }
 
   // For tools/privacy-test.js.
-  globalThis.PIP_PRIVACY = TEXT;
+  globalThis.PIP_PRIVACY = PRIVACY;
 })();
